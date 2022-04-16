@@ -9,7 +9,10 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation"
+				"type": "AzureBlobStorageLocation",
+				"fileName": "patientdata1_10_initial.csv",
+				"folderPath": "input",
+				"container": "adfprocessing"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
