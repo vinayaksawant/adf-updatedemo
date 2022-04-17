@@ -123,7 +123,7 @@
 				"AddDocumentKey, priorloadeddata exists(AddDocumentKey@DocumentKey == priorloadeddata@DocumentKey,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> doesnotexists",
-				"doesnotexists select(mapColumn(",
+				"exists1 select(mapColumn(",
 				"          BeneID,",
 				"          ClaimID,",
 				"          ClaimStartDt,",
