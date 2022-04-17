@@ -117,7 +117,7 @@
 				"InputRawData derive(DocumentKey = concat(BeneID, ClaimID),",
 				"          insertflag = true(),",
 				"          updateflag = false()) ~> AddDocumentKey",
-				"AddDocumentKey, priorloadeddata exists(AddDocumentKey@DocumentKey == priorloadeddata@DocumentKey,",
+				"AddDocumentKey, priorloadeddata exists(DocumentKey == id,",
 				"     negate:false,",
 				"     broadcast: 'auto')~> exists",
 				"exists select(mapColumn(",
