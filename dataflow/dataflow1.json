@@ -10,25 +10,20 @@
 						"type": "DatasetReference"
 					},
 					"name": "InputRawData"
-				},
-				{
-					"dataset": {
-						"referenceName": "PriorDataCosmos",
-						"type": "DatasetReference"
-					},
-					"name": "PriorCosmosLoadedData"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "CosmosDbSqlApiCollection1",
+						"type": "DatasetReference"
+					},
+					"name": "outputtocosmos"
+				}
+			],
 			"transformations": [
 				{
 					"name": "AddDocumentKey"
-				},
-				{
-					"name": "doesnotexists"
-				},
-				{
-					"name": "inserttruecolumn"
 				}
 			],
 			"scriptLines": [
@@ -68,14 +63,53 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: true,",
 				"     moveFiles: ['/input','processed']) ~> InputRawData",
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     format: 'document') ~> PriorCosmosLoadedData",
 				"InputRawData derive(DocumentKey = concat(BeneID, ClaimID)) ~> AddDocumentKey",
-				"AddDocumentKey, PriorCosmosLoadedData exists(DocumentKey == id,",
-				"     negate:true,",
-				"     broadcast: 'auto')~> doesnotexists",
-				"doesnotexists derive(insertcolumn = true()) ~> inserttruecolumn"
+				"AddDocumentKey sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'document',",
+				"     partitionKey: ['/id'],",
+				"     mapColumn(",
+				"          BeneID,",
+				"          ClaimID,",
+				"          ClaimStartDt,",
+				"          ClaimEndDt,",
+				"          Provider,",
+				"          InscClaimAmtReimbursed,",
+				"          AttendingPhysician,",
+				"          OperatingPhysician,",
+				"          OtherPhysician,",
+				"          AdmissionDt,",
+				"          ClmAdmitDiagnosisCode,",
+				"          DeductibleAmtPaid,",
+				"          DischargeDt,",
+				"          DiagnosisGroupCode,",
+				"          ClmDiagnosisCode_1,",
+				"          ClmDiagnosisCode_2,",
+				"          ClmDiagnosisCode_3,",
+				"          ClmDiagnosisCode_4,",
+				"          ClmDiagnosisCode_5,",
+				"          ClmDiagnosisCode_6,",
+				"          ClmDiagnosisCode_7,",
+				"          ClmDiagnosisCode_8,",
+				"          ClmDiagnosisCode_9,",
+				"          ClmDiagnosisCode_10,",
+				"          ClmProcedureCode_1,",
+				"          ClmProcedureCode_2,",
+				"          ClmProcedureCode_3,",
+				"          ClmProcedureCode_4,",
+				"          ClmProcedureCode_5,",
+				"          ClmProcedureCode_6,",
+				"          DocumentKey,",
+				"          id = DocumentKey,",
+				"          each(match(true()),",
+				"               insertcolumn = $$),",
+				"          each(match(true()),",
+				"               updatecolumn = $$)",
+				"     )) ~> outputtocosmos"
 			]
 		}
 	}
