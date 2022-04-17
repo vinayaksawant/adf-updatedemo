@@ -1,0 +1,22 @@
+{
+	"name": "ADFFolderSimulator_AZUREStorageAccount",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "InputSource_AzureBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "input",
+				"container": "adfprocessing"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

@@ -5,7 +5,14 @@
 			{
 				"name": "pipeline_patientinsertupdate",
 				"type": "ExecuteDataFlow",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "FilterPatientFilesOnly",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "1.00:00:00",
 					"retry": 0,
@@ -24,6 +31,56 @@
 						"computeType": "General"
 					},
 					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "GetAllFilesFromSourceFolder",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ADFFolderSimulator_AZUREStorageAccount",
+						"type": "DatasetReference"
+					},
+					"fieldList": [],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "FilterPatientFilesOnly",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "GetAllFilesFromSourceFolder",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('GetAllFilesFromSourceFolder').output.ChildItems",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@startswith(item().name, 'patient')",
+						"type": "Expression"
+					}
 				}
 			}
 		],
