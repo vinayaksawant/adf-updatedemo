@@ -140,7 +140,7 @@
 				"     broadcast: 'left')~> doesnotexists",
 				"AddDocumentKey, priorloadeddata exists(AddDocumentKey@DocumentKey == priorloadeddata@DocumentKey,",
 				"     negate:false,",
-				"     broadcast: 'auto')~> exists",
+				"     broadcast: 'left')~> exists",
 				"insertflag alterRow(insertIf(insertflag==true())) ~> insertalterRow",
 				"doesnotexists derive(insertflag = true(),",
 				"          updateflag = false()) ~> insertflag",
