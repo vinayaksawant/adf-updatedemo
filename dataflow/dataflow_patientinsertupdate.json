@@ -134,7 +134,7 @@
 				"AddDocumentKey, priorloadeddata exists(AddDocumentKey@DocumentKey == priorloadeddata@DocumentKey,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> doesnotexists",
-				"AddDocumentKey, priorloadeddata exists(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"AddDocumentKey, priorloadeddata exists(AddDocumentKey@DocumentKey == priorloadeddata@DocumentKey,",
 				"     negate:false,",
 				"     broadcast: 'auto')~> exists",
 				"insertflag alterRow(insertIf(insertflag == true())) ~> insertalterRow",
