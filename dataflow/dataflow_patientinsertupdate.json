@@ -95,7 +95,7 @@
 				"     validateSchema: false,",
 				"     limit: 100,",
 				"     ignoreNoFilesFound: true,",
-				"     wildcardPaths:['\\'input/patient*\\'']) ~> InputRawData",
+				"     moveFiles: ['input',(concat('processed/Patient',       replace(       replace(toString(currentTimestamp()),':','-'),' ', '-'),        '.csv'    ))]) ~> InputRawData",
 				"source(output(",
 				"          ClmDiagnosisCode_9 as string,",
 				"          ClmAdmitDiagnosisCode as string,",
