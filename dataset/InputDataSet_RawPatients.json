@@ -10,6 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "patientdata1_10_initial.csv",
+				"folderPath": "input",
 				"container": "adfprocessing"
 			},
 			"columnDelimiter": ",",
