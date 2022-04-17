@@ -53,6 +53,9 @@
 				},
 				{
 					"name": "updateflag"
+				},
+				{
+					"name": "updatealterRow"
 				}
 			],
 			"scriptLines": [
@@ -143,11 +146,12 @@
 				"          updateflag = false()) ~> insertflag",
 				"exists derive(updateflag = true(),",
 				"          insertflag = false()) ~> updateflag",
-				"updateflag sink(allowSchemaDrift: true,",
+				"updateflag alterRow(updateIf(updateflag == true())) ~> updatealterRow",
+				"updatealterRow sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
 				"     upsertable:false,",
 				"     format: 'document',",
 				"     partitionKey: ['/id'],",
