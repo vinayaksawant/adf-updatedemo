@@ -36,7 +36,7 @@
 					"name": "exists"
 				},
 				{
-					"name": "settruecolumn"
+					"name": "setupdateflag"
 				}
 			],
 			"scriptLines": [
@@ -152,12 +152,12 @@
 				"          ClmProcedureCode_5,",
 				"          ClmProcedureCode_6,",
 				"          DocumentKey,",
-				"          {true()} = insertflag,",
-				"          {false()} = updateflag",
+				"          {false()} = insertflag,",
+				"          {true()} = updateflag",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> settruecolumn",
-				"settruecolumn sink(allowSchemaDrift: true,",
+				"     skipDuplicateMapOutputs: false) ~> setupdateflag",
+				"setupdateflag sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -197,8 +197,8 @@
 				"          ClmProcedureCode_5,",
 				"          ClmProcedureCode_6,",
 				"          DocumentKey,",
-				"          insertflag = {true()},",
-				"          updateflag = {false()},",
+				"          insertflag = {false()},",
+				"          updateflag = {true()},",
 				"          id = DocumentKey",
 				"     )) ~> outputtocosmos"
 			]
