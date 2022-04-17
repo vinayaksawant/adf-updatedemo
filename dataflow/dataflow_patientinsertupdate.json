@@ -118,7 +118,7 @@
 				"          insertflag = true(),",
 				"          updateflag = false()) ~> AddDocumentKey",
 				"AddDocumentKey, priorloadeddata exists(AddDocumentKey@DocumentKey == priorloadeddata@DocumentKey,",
-				"     negate:true,",
+				"     negate:false,",
 				"     broadcast: 'auto')~> exists",
 				"exists select(mapColumn(",
 				"          BeneID,",
