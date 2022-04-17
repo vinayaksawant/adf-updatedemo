@@ -50,6 +50,9 @@
 				},
 				{
 					"name": "setinsertflag"
+				},
+				{
+					"name": "insertalterRow"
 				}
 			],
 			"scriptLines": [
@@ -204,12 +207,11 @@
 				"          ClmProcedureCode_4,",
 				"          ClmProcedureCode_5,",
 				"          ClmProcedureCode_6,",
-				"          DocumentKey,",
-				"          {true()} = insertflag,",
-				"          {false()} = updateflag",
+				"          DocumentKey",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> setinsertflag",
+				"setinsertflag alterRow(insertIf(insertflag)) ~> insertalterRow",
 				"setupdateflag sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
@@ -254,7 +256,7 @@
 				"          updateflag = {true()},",
 				"          id = DocumentKey",
 				"     )) ~> updateoutputtocosmos",
-				"setinsertflag sink(allowSchemaDrift: true,",
+				"insertalterRow sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
