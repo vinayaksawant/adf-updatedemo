@@ -140,7 +140,7 @@
 				"     broadcast: 'auto')~> exists",
 				"insertflag alterRow(insertIf(insertflag == true())) ~> insertalterRow",
 				"doesnotexists derive(insertflag = true()) ~> insertflag",
-				"exists derive() ~> updateflag",
+				"exists derive(updateflag = true()) ~> updateflag",
 				"updateflag sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
