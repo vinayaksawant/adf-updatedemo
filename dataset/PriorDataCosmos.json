@@ -1,0 +1,15 @@
+{
+	"name": "PriorDataCosmos",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ReadPriorDataCosmosDb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "CosmosDbSqlApiCollection",
+		"schema": {},
+		"typeProperties": {
+			"collectionName": "cont_patient"
+		}
+	}
+}
