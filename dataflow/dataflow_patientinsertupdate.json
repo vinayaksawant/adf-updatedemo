@@ -43,16 +43,16 @@
 					"name": "doesnotexists"
 				},
 				{
-					"name": "setupdateflag"
-				},
-				{
-					"name": "exists1"
+					"name": "exists"
 				},
 				{
 					"name": "insertalterRow"
 				},
 				{
 					"name": "insertflag"
+				},
+				{
+					"name": "updateflag"
 				}
 			],
 			"scriptLines": [
@@ -134,49 +134,13 @@
 				"AddDocumentKey, priorloadeddata exists(AddDocumentKey@DocumentKey == priorloadeddata@DocumentKey,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> doesnotexists",
-				"exists1 select(mapColumn(",
-				"          BeneID,",
-				"          ClaimID,",
-				"          ClaimStartDt,",
-				"          ClaimEndDt,",
-				"          Provider,",
-				"          InscClaimAmtReimbursed,",
-				"          AttendingPhysician,",
-				"          OperatingPhysician,",
-				"          OtherPhysician,",
-				"          AdmissionDt,",
-				"          ClmAdmitDiagnosisCode,",
-				"          DeductibleAmtPaid,",
-				"          DischargeDt,",
-				"          DiagnosisGroupCode,",
-				"          ClmDiagnosisCode_1,",
-				"          ClmDiagnosisCode_2,",
-				"          ClmDiagnosisCode_3,",
-				"          ClmDiagnosisCode_4,",
-				"          ClmDiagnosisCode_5,",
-				"          ClmDiagnosisCode_6,",
-				"          ClmDiagnosisCode_7,",
-				"          ClmDiagnosisCode_8,",
-				"          ClmDiagnosisCode_9,",
-				"          ClmDiagnosisCode_10,",
-				"          ClmProcedureCode_1,",
-				"          ClmProcedureCode_2,",
-				"          ClmProcedureCode_3,",
-				"          ClmProcedureCode_4,",
-				"          ClmProcedureCode_5,",
-				"          ClmProcedureCode_6,",
-				"          DocumentKey,",
-				"          {false()} = insertflag,",
-				"          {true()} = updateflag",
-				"     ),",
-				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> setupdateflag",
 				"AddDocumentKey, priorloadeddata exists(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
 				"     negate:false,",
-				"     broadcast: 'auto')~> exists1",
+				"     broadcast: 'auto')~> exists",
 				"insertflag alterRow(insertIf(insertflag == true())) ~> insertalterRow",
 				"doesnotexists derive(insertflag = true()) ~> insertflag",
-				"setupdateflag sink(allowSchemaDrift: true,",
+				"exists derive() ~> updateflag",
+				"updateflag sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
