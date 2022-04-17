@@ -22,14 +22,14 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "CosmosDbSqlApiCollection1",
+						"referenceName": "WriteDataCosmos",
 						"type": "DatasetReference"
 					},
 					"name": "updateoutputtocosmos"
 				},
 				{
 					"dataset": {
-						"referenceName": "CosmosDbSqlApiCollection1",
+						"referenceName": "WriteDataCosmos",
 						"type": "DatasetReference"
 					},
 					"name": "insertoutputtocosmos"

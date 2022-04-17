@@ -1,5 +1,5 @@
 {
-	"name": "CosmosDbSqlApiCollection1",
+	"name": "WriteDataCosmos",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "OutPutStreamCosmosDb",
