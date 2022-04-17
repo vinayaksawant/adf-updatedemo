@@ -106,6 +106,8 @@
 				"          ClmProcedureCode_5,",
 				"          ClmProcedureCode_6,",
 				"          DocumentKey,",
+				"          insertflag,",
+				"          updateflag,",
 				"          id = DocumentKey",
 				"     )) ~> outputtocosmos"
 			]
