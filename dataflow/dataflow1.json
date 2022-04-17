@@ -15,7 +15,7 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "derivedColumn1"
+					"name": "AddDocumentKey"
 				}
 			],
 			"scriptLines": [
@@ -55,7 +55,7 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: true,",
 				"     moveFiles: ['/input','processed']) ~> InputRawData",
-				"InputRawData derive(DocumentKey = concat(BeneID, ClaimID)) ~> derivedColumn1"
+				"InputRawData derive(DocumentKey = concat(BeneID, ClaimID)) ~> AddDocumentKey"
 			]
 		}
 	}
