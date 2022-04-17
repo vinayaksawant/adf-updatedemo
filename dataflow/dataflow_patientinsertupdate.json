@@ -25,7 +25,14 @@
 						"referenceName": "CosmosDbSqlApiCollection1",
 						"type": "DatasetReference"
 					},
-					"name": "outputtocosmos"
+					"name": "updateoutputtocosmos"
+				},
+				{
+					"dataset": {
+						"referenceName": "CosmosDbSqlApiCollection1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
 				}
 			],
 			"transformations": [
@@ -246,7 +253,16 @@
 				"          insertflag = {false()},",
 				"          updateflag = {true()},",
 				"          id = DocumentKey",
-				"     )) ~> outputtocosmos"
+				"     )) ~> updateoutputtocosmos",
+				"setinsertflag sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'document',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
