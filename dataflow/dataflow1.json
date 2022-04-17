@@ -72,7 +72,7 @@
 				"     validateSchema: false,",
 				"     format: 'document') ~> PriorCosmosLoadedData",
 				"InputRawData derive(DocumentKey = concat(BeneID, ClaimID)) ~> AddDocumentKey",
-				"AddDocumentKey, PriorCosmosLoadedData exists(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"AddDocumentKey, PriorCosmosLoadedData exists(DocumentKey == id,",
 				"     negate:true,",
 				"     broadcast: 'auto')~> doesnotexists",
 				"AddDocumentKey, PriorCosmosLoadedData exists(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
