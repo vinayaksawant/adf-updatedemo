@@ -32,7 +32,7 @@
 						"referenceName": "CosmosDbSqlApiCollection1",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "insertoutputtocosmos"
 				}
 			],
 			"transformations": [
@@ -262,7 +262,7 @@
 				"     upsertable:false,",
 				"     format: 'document',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true) ~> insertoutputtocosmos"
 			]
 		}
 	}
