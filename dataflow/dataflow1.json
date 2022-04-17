@@ -104,11 +104,7 @@
 				"          ClmProcedureCode_5,",
 				"          ClmProcedureCode_6,",
 				"          DocumentKey,",
-				"          id = DocumentKey,",
-				"          each(match(true()),",
-				"               insertcolumn = $$),",
-				"          each(match(true()),",
-				"               updatecolumn = $$)",
+				"          id = DocumentKey",
 				"     )) ~> outputtocosmos"
 			]
 		}
